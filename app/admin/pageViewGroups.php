@@ -74,14 +74,14 @@
 				$groupMembersCount = sqlValue("select count(1) from membership_users where groupID='$row[0]'");
 				?>
 				<tr>
-					<td><a href="pageEditGroup.php?groupID=<?php echo $row[0]; ?>"><?php echo $row[1]; ?></a></td>
-					<td><?php echo thisOr($row[2]); ?></td>
+					<td><a href="pageEditGroup.php?groupID=<?php echo $row[0]; ?>"><?php echo htmlspecialchars($row[1]); ?></a></td>
+					<td><?php echo htmlspecialchars(thisOr($row[2])); ?></td>
 					<td class="text-right"><?php echo $groupMembersCount; ?></td>
 					<td class="text-center">
 						<a href="pageEditGroup.php?groupID=<?php echo $row[0]; ?>" title="<?php echo $Translation['Edit group']; ?>"><i class="glyphicon glyphicon-pencil"></i></a>
 						<?php if(!$groupMembersCount) { ?>
-								<a href="pageDeleteGroup.php?groupID=<?php echo $row[0]; ?>" 
-								   title="<?php echo $Translation['delete group'] ; ?>" 
+								<a href="pageDeleteGroup.php?groupID=<?php echo $row[0]; ?>"
+								   title="<?php echo $Translation['delete group'] ; ?>"
 								   onClick="return confirm('<?php echo addslashes($Translation['confirm delete group']); ?>');">
 									<i class="glyphicon glyphicon-trash text-danger"></i>
 								</a>
@@ -112,7 +112,7 @@
 							<a class="btn btn-default" href="pageViewGroups.php?searchGroups=<?php echo $searchHTML; ?>&page=<?php echo ($page > 1 ? $page - 1 : 1); ?>"><?php echo $Translation['previous']; ?></a>
 						</th>
 						<th class="text-center" width="33%">
-							<?php 
+							<?php
 								$originalValues =  array ('<GROUPNUM1>','<GROUPNUM2>','<GROUPS>' );
 								$replaceValues = array ( $start+1 , $start+db_num_rows($res) , $numGroups );
 								echo str_replace ( $originalValues , $replaceValues , $Translation['displaying groups'] );
